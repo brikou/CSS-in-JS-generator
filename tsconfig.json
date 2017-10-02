@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noUnusedLocals": true,
+        "strict": true,
+        "target": "es2015"
+    }
+}
