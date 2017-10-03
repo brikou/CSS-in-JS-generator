@@ -1,5 +1,4 @@
 import * as path from "path";
-import { format } from "prettier";
 
 import { convertScopedCssForEmotion } from "./convertScopedCssForEmotion";
 import { convertScopeToModuleName } from "./convertScopeToModuleName";
@@ -61,11 +60,6 @@ export function convertCssForEmotion(css: string): Map<string, string> {
                 currentScope,
             )} = css\`${convertedScopedCssForEmotion}\`;\n`;
         }
-
-        source = format(source, {
-            parser: "typescript",
-            tabWidth: 4,
-        });
 
         if (currentScope === "root") {
             source = source.replace(/ css\`/m, " injectGlobal`");

@@ -1,6 +1,6 @@
 {
     "name": "css-in-js-generator",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "A tool to generate trendy CSS-in-JS files from regular CSS.",
     "main": "index.js",
     "scripts": {
@@ -30,7 +30,7 @@
         "camelcase": "4.1.0",
         "postcss": "6.0.12",
         "postcss-selector-parser": "3.0.0-rc.0",
-        "prettier": "1.7.2"
+        "prettier": "1.7.3"
     },
     "devDependencies": {
         "@types/archiver": "2.0.0",

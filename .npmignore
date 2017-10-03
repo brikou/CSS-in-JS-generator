@@ -1,5 +1,3 @@
-*.ts
-.vscode
-lib/__tests__
-tsconfig.json
-tslint.json
+*
+!lib/*.js
+!index.js

@@ -1,3 +1,5 @@
+import { format } from "prettier";
+
 import { convertCssForEmotion } from "../convertCssForEmotion";
 
 test("convertCssForEmotion", () => {
@@ -113,7 +115,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 `;
 
-    const cssForEmotion = new Map([
+    const expectedCssForEmotion = new Map([
         [
             "index.js",
             `import { injectGlobal } from "emotion";
@@ -290,5 +292,22 @@ export const formControl = css\`
         ],
     ]);
 
-    expect(convertCssForEmotion(css)).toEqual(cssForEmotion);
+    const actualCssForEmotion = convertCssForEmotion(css);
+    [...actualCssForEmotion.keys()].forEach((filename) => {
+        let source = actualCssForEmotion.get(filename) as string;
+        // this makes prettier handle injectGlobal template literal
+        if (filename === "index.js") {
+            source = source.replace("injectGlobal`", "css`");
+        }
+        source = format(source, {
+            parser: "typescript",
+            tabWidth: 4,
+        });
+        if (filename === "index.js") {
+            source = source.replace("css`", "injectGlobal`");
+        }
+        actualCssForEmotion.set(filename, source);
+    });
+
+    expect(actualCssForEmotion).toEqual(expectedCssForEmotion);
 });
