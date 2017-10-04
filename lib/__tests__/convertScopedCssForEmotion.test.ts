@@ -89,7 +89,7 @@ test("convertScopedCssForEmotion", () => {
     border-top-color: #9fcdff;
 }
 
-& .\${alertLink} {
+& .\${alertLink()} {
     color: #002752;
 }
 `,

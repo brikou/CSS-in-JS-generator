@@ -1,10 +1,10 @@
 {
     "name": "css-in-js-generator",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "A tool to generate trendy CSS-in-JS files from regular CSS.",
     "main": "index.js",
     "scripts": {
-        "prepublish": "tsc --pretty",
+        "prepublish": "npm run-script test && tsc --pretty",
         "test": "jest"
     },
     "repository": {
@@ -26,17 +26,16 @@
     },
     "homepage": "https://github.com/brikou/CSS-in-JS-generator#readme",
     "dependencies": {
-        "archiver": "2.0.3",
         "camelcase": "4.1.0",
-        "postcss": "6.0.12",
+        "postcss": "6.0.13",
         "postcss-selector-parser": "3.0.0-rc.0",
-        "prettier": "1.7.3"
+        "prettier": "1.7.4"
     },
     "devDependencies": {
         "@types/archiver": "2.0.0",
-        "@types/jest": "21.1.1",
-        "@types/lodash": "4.14.76",
-        "@types/node": "8.0.31",
+        "@types/jest": "21.1.2",
+        "@types/lodash": "4.14.77",
+        "@types/node": "8.0.32",
         "@types/prettier": "1.7.0",
         "jest": "21.2.1",
         "lodash.shuffle": "4.2.0",

@@ -13,7 +13,7 @@ export function convertSelectorForEmotion(
                 node.toString = () => "&";
             } else if (knownScopes.has(node.toString())) {
                 node.toString = () =>
-                    ".${" + convertScopeToModuleName(node.value) + "}";
+                    ".${" + convertScopeToModuleName(node.value) + "()}";
             }
         });
     }).processSync(selector);
