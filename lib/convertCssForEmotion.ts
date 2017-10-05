@@ -19,19 +19,7 @@ export function convertCssForEmotion(css: string): string {
 
     const knownScopes = new Set([...cssIndexedByScope.keys()]);
 
-    const collator = new Intl.Collator(undefined, {
-        numeric: true,
-        sensitivity: "base",
-    });
-
     [...knownScopes]
-        .sort((scopeA, scopeB) => {
-            if (scopeA === "root") {
-                return -1;
-            }
-
-            return collator.compare(scopeA, scopeB);
-        })
         .forEach((scope) => {
             cssForEmotion += "\n";
 
@@ -42,11 +30,11 @@ export function convertCssForEmotion(css: string): string {
             );
 
             if (scope === "root") {
-                cssForEmotion += `export default () => injectGlobal\`${convertedScopedCssForEmotion}\`;\n`;
+                cssForEmotion += `injectGlobal\`${convertedScopedCssForEmotion}\`;\n`;
             } else {
                 cssForEmotion += `export const ${convertScopeToModuleName(
                     scope,
-                )} = () => css\`${convertedScopedCssForEmotion}\`;\n`;
+                )} = css\`${convertedScopedCssForEmotion}\`;\n`;
             }
         });
 

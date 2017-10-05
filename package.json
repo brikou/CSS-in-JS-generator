@@ -1,6 +1,6 @@
 {
     "name": "css-in-js-generator",
-    "version": "0.3.0-alpha.1",
+    "version": "0.3.0-alpha.2",
     "description": "A tool to generate trendy CSS-in-JS files from regular CSS.",
     "main": "index.js",
     "scripts": {

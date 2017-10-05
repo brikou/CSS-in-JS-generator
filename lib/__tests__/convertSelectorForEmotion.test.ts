@@ -16,7 +16,7 @@ test("convertSelectorForEmotion", () => {
                 ".no-gutters",
                 new Set(["root", ".no-gutters", ".col"]),
             ],
-            "& > .${col()}",
+            "& > .${col}",
         ],
         [
             [
@@ -24,7 +24,7 @@ test("convertSelectorForEmotion", () => {
                 ".alert-primary",
                 new Set(["root", ".alert-primary", ".alert-link"]),
             ],
-            "& .${alertLink()}",
+            "& .${alertLink}",
         ],
     ].forEach(([[selector, scope, knownScopes], convertedSelector]) => {
         expect(

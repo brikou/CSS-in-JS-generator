@@ -115,7 +115,7 @@ select.form-control:not([size]):not([multiple]) {
 
     const cssForEmotion = `import { css, injectGlobal } from "emotion";
 
-export default () => injectGlobal\`*, *::before, *::after {
+injectGlobal\`*, *::before, *::after {
     box-sizing: inherit;
 }
 
@@ -162,39 +162,7 @@ export default () => injectGlobal\`*, *::before, *::after {
 
 \`;
 
-export const alertDismissible = () => css\`& .\${close()} {
-    position: relative;
-    top: -0.75rem;
-    right: -1.25rem;
-    padding: 0.75rem 1.25rem;
-    color: inherit;
-}
-
-\`;
-
-export const alertLink = () => css\`
-    font-weight: bold;
-
-
-\`;
-
-export const alertPrimary = () => css\`
-    color: #004085;
-    background-color: #cce5ff;
-    border-color: #b8daff;
-
-
-& hr {
-    border-top-color: #9fcdff;
-}
-
-& .\${alertLink()} {
-    color: #002752;
-}
-
-\`;
-
-export const badge = () => css\`@media print {
+export const badge = css\`@media print {
     & {
         border: 1px solid #000;
     }
@@ -220,7 +188,50 @@ export const badge = () => css\`@media print {
 
 \`;
 
-export const badgeDanger = () => css\`
+export const formControl = css\`select&:not([size]):not([multiple]) {
+    height: calc(2.25rem + 2px);
+}
+
+&::placeholder {
+    color: #868e96;
+    opacity: 1;
+}
+
+\`;
+
+export const alertDismissible = css\`& .\${close} {
+    position: relative;
+    top: -0.75rem;
+    right: -1.25rem;
+    padding: 0.75rem 1.25rem;
+    color: inherit;
+}
+
+\`;
+
+export const alertLink = css\`
+    font-weight: bold;
+
+
+\`;
+
+export const alertPrimary = css\`
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+
+
+& hr {
+    border-top-color: #9fcdff;
+}
+
+& .\${alertLink} {
+    color: #002752;
+}
+
+\`;
+
+export const badgeDanger = css\`
     color: #fff;
     background-color: #dc3545;
 
@@ -233,7 +244,7 @@ export const badgeDanger = () => css\`
 
 \`;
 
-export const blockquoteFooter = () => css\`
+export const blockquoteFooter = css\`
     display: block;
     font-size: 80%;
     color: #868e96;
@@ -245,7 +256,7 @@ export const blockquoteFooter = () => css\`
 
 \`;
 
-export const close = () => css\`
+export const close = css\`
     float: right;
     font-size: 1.5rem;
     font-weight: bold;
@@ -257,7 +268,7 @@ export const close = () => css\`
 
 \`;
 
-export const display1 = () => css\`
+export const display1 = css\`
     font-size: 6rem;
     font-weight: 300;
     line-height: 1.1;
@@ -265,22 +276,11 @@ export const display1 = () => css\`
 
 \`;
 
-export const display2 = () => css\`
+export const display2 = css\`
     font-size: 5.5rem;
     font-weight: 300;
     line-height: 1.1;
 
-
-\`;
-
-export const formControl = () => css\`select&:not([size]):not([multiple]) {
-    height: calc(2.25rem + 2px);
-}
-
-&::placeholder {
-    color: #868e96;
-    opacity: 1;
-}
 
 \`;
 `;

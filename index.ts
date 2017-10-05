@@ -12,12 +12,12 @@ const convertedCss = convertCssForEmotion(
 console.log(
     format(
         convertedCss.replace(
-            "export default () => injectGlobal",
-            "export default () => css",
+            /^injectGlobal/m,
+            "css",
         ),
         {
             parser: "typescript",
             tabWidth: 4,
         },
-    ).replace("export default () => css", "export default () => injectGlobal"),
+    ).replace(/^css/m, "injectGlobal"),
 );
