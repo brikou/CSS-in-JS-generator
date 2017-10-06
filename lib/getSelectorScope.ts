@@ -5,7 +5,14 @@ export function getSelectorScope(selector: string): string {
 
     parseSelector((nodes: any) => {
         for (const node of nodes.first.nodes) {
-            if (node.type === "class") {
+            if (
+                node.type === "tag" &&
+                selectorScope === "root" &&
+                node.value !== "html" &&
+                node.value !== "body"
+            ) {
+                selectorScope = node.toString().toLowerCase();
+            } else if (node.type === "class") {
                 selectorScope = node.toString();
                 break;
             }

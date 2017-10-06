@@ -94,6 +94,98 @@ test("convertScopedCssForEmotion", () => {
 }
 `,
         ],
+        [
+            [
+                `@media print {
+    pre {
+        white-space: pre-wrap !important;
+    }
+
+    pre {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+}
+
+pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+pre {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+}
+
+pre {
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+        monospace;
+}
+
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 90%;
+    color: #212529;
+}
+
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+`,
+                "pre",
+                new Set(["root", "code", "pre"]),
+            ],
+            `@media print {
+    & {
+        white-space: pre-wrap !important;
+    }
+
+    & {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+}
+
+
+    font-family: monospace, monospace;
+    font-size: 1em;
+
+
+
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+
+
+
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+        monospace;
+
+
+
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 90%;
+    color: #212529;
+
+
+& code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+`,
+        ],
     ].forEach(([[scopedCss, scope, scopes], scopedCssForEmotion]) => {
         expect(
             convertScopedCssForEmotion(

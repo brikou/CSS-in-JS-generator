@@ -8,12 +8,18 @@ export function convertSelectorForEmotion(
     knownScopes: Set<string>,
 ): string {
     return parseSelector((nodes: any) => {
-        nodes.first.walkClasses((node: any) => {
-            if (node.toString() === scope) {
-                node.toString = () => "&";
-            } else if (knownScopes.has(node.toString())) {
-                node.toString = () =>
-                    ".${" + convertScopeToModuleName(node.value) + "}";
+        nodes.first.walk((node: any) => {
+            if (node.type === "class") {
+                if (node.toString() === scope) {
+                    node.toString = () => "&";
+                } else if (knownScopes.has(node.toString())) {
+                    node.toString = () =>
+                        `.\${${convertScopeToModuleName(`.${node.value}`)}}`;
+                }
+            } else if (node.type === "tag") {
+                if (node.toString() === scope) {
+                    node.toString = () => "&";
+                }
             }
         });
     }).processSync(selector);

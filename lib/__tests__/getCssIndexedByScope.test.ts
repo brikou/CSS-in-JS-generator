@@ -80,26 +80,10 @@ pre {
         box-shadow: none !important;
     }
 
-    pre {
-        white-space: pre-wrap !important;
-    }
-
 }
 
 @-ms-viewport {
     width: device-width;
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-pre {
-    display: block;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 90%;
-    color: #212529;
 }
 
 @keyframes mdc-checkbox-unchecked-indeterminate-mixedmark {
@@ -119,6 +103,32 @@ pre {
         transform: scaleX(1);
     }
 
+}
+`,
+            ],
+            [
+                "h1",
+                `h1 {
+    font-size: 2.5rem;
+}
+`,
+            ],
+            [
+                "pre",
+                `@media print {
+
+    pre {
+        white-space: pre-wrap !important;
+    }
+
+}
+
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 90%;
+    color: #212529;
 }
 `,
             ],

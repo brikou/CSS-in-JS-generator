@@ -23,7 +23,7 @@ test("getNodeScopes", () => {
                     }
                 }
             `).first,
-            new Set(["root", ".navbar"]),
+            new Set(["root", "pre", ".navbar"]),
         ],
         [
             postcss.parse(`
@@ -120,7 +120,7 @@ test("getNodeScopes", () => {
                     font-size: 2.5rem;
                 }
             `).first,
-            new Set(["root", ".h1"]),
+            new Set(["h1", ".h1"]),
         ],
         [
             postcss.parse(`

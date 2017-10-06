@@ -12,9 +12,27 @@ test("convertCssForEmotion", () => {
 }
 
 @media print {
+    pre {
+        white-space: pre-wrap !important;
+    }
+
     .badge {
         border: 1px solid #000;
     }
+}
+
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+pre,
+code {
+    font-family: monospace, monospace;
+    font-size: 1em;
 }
 
 select.form-control:not([size]):not([multiple]) {
@@ -113,52 +131,41 @@ select.form-control:not([size]):not([multiple]) {
 }
 `;
 
-    const cssForEmotion = `import { css, injectGlobal } from "emotion";
+    const cssForEmotion = `import { css, injectGlobal, styled } from "emotion";
 
 injectGlobal\`*, *::before, *::after {
     box-sizing: inherit;
 }
 
-
-
 @-ms-viewport {
     width: device-width;
 }
 
+\`;
 
+export const Code = styled.code\`
+    font-family: monospace, monospace;
+    font-size: 1em;
 
+\`;
 
+export const Pre = styled.pre\`@media print {
+    & {
+        white-space: pre-wrap !important;
+    }
 
+}
 
+& code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    font-family: monospace, monospace;
+    font-size: 1em;
 
 \`;
 
@@ -170,7 +177,6 @@ export const close = css\`
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
-
 
 \`;
 
@@ -187,14 +193,12 @@ export const alertDismissible = css\`& .\${close} {
 export const alertLink = css\`
     font-weight: bold;
 
-
 \`;
 
 export const alertPrimary = css\`
     color: #004085;
     background-color: #cce5ff;
     border-color: #b8daff;
-
 
 & hr {
     border-top-color: #9fcdff;
@@ -207,13 +211,12 @@ export const alertPrimary = css\`
 \`;
 
 export const badge = css\`@media print {
+
     & {
         border: 1px solid #000;
     }
 
-
 }
-
 
     display: inline-block;
     padding: 0.25em 0.4em;
@@ -225,7 +228,6 @@ export const badge = css\`@media print {
     vertical-align: baseline;
     border-radius: 0.25rem;
 
-
 &:empty {
     display: none;
 }
@@ -235,7 +237,6 @@ export const badge = css\`@media print {
 export const badgeDanger = css\`
     color: #fff;
     background-color: #dc3545;
-
 
 &[href]:focus, &[href]:hover {
     color: #fff;
@@ -250,26 +251,23 @@ export const blockquoteFooter = css\`
     font-size: 80%;
     color: #868e96;
 
-
 &::before {
     content: "\\\\2014 \\\\00A0";
 }
 
 \`;
 
-export const display1 = css\`
+export const display_1 = css\`
     font-size: 6rem;
     font-weight: 300;
     line-height: 1.1;
 
-
 \`;
 
-export const display2 = css\`
+export const display_2 = css\`
     font-size: 5.5rem;
     font-weight: 300;
     line-height: 1.1;
-
 
 \`;
 
@@ -285,5 +283,7 @@ export const formControl = css\`select&:not([size]):not([multiple]) {
 \`;
 `;
 
-    expect(convertCssForEmotion(css)).toEqual(cssForEmotion);
+    expect(convertCssForEmotion(css).replace(/^\s+$/gm, "")).toEqual(
+        cssForEmotion,
+    );
 });

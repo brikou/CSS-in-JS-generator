@@ -4,30 +4,26 @@ import { getCssIndexedByScope } from "./getCssIndexedByScope";
 import { getRequiredScopes } from "./getRequiredScopes";
 
 export function convertCssForEmotion(css: string): string {
-    let cssForEmotion = "";
-
     const cssIndexedByScope = getCssIndexedByScope(css);
-
-    if (cssIndexedByScope.has("root")) {
-        if (cssIndexedByScope.size > 1) {
-            cssForEmotion += 'import { css, injectGlobal } from "emotion";\n';
-        } else {
-            cssForEmotion += 'import { injectGlobal } from "emotion";\n';
-        }
-    } else if (cssIndexedByScope.size > 0) {
-        cssForEmotion += 'import { css } from "emotion";\n';
-    }
-
-    const knownScopes = new Set([...cssIndexedByScope.keys()]);
 
     const collator = new Intl.Collator(undefined, {
         numeric: true,
         sensitivity: "base",
     });
 
+    const knownScopes = new Set([...cssIndexedByScope.keys()]);
+
     const sortedKnownScopes = [...knownScopes]
         .sort((scopeA, scopeB) => {
             if (scopeA === "root") {
+                return -1;
+            }
+
+            if (scopeA[0] === "." && scopeB[0] !== ".") {
+                return +1;
+            }
+
+            if (scopeA[0] !== "." && scopeB[0] === ".") {
                 return -1;
             }
 
@@ -51,6 +47,18 @@ export function convertCssForEmotion(css: string): string {
             return previousSortedKnownScopes;
         }, new Set());
 
+    let cssForEmotion = `import { ${[
+        [...sortedKnownScopes].some((scope) => scope[0] === ".") ? "css" : "",
+        sortedKnownScopes.has("root") ? "injectGlobal" : "",
+        [...sortedKnownScopes].some(
+            (scope) => scope !== "root" && scope[0] !== ".",
+        )
+            ? "styled"
+            : "",
+    ]
+        .filter(String)
+        .join(", ")} } from "emotion";\n`;
+
     sortedKnownScopes.forEach((scope) => {
         cssForEmotion += "\n";
 
@@ -65,7 +73,9 @@ export function convertCssForEmotion(css: string): string {
         } else {
             cssForEmotion += `export const ${convertScopeToModuleName(
                 scope,
-            )} = css\`${convertedScopedCssForEmotion}\`;\n`;
+            )} = ${scope[0] === "."
+                ? "css"
+                : `styled.${scope}`}\`${convertedScopedCssForEmotion}\`;\n`;
         }
     });
 

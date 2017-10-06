@@ -12,12 +12,12 @@ const convertedCss = convertCssForEmotion(
 console.log(
     format(
         convertedCss.replace(
-            /^injectGlobal/m,
-            "css",
+            /(injectGlobal|styled)`/g,
+            "/* $1 */ css`",
         ),
         {
             parser: "typescript",
             tabWidth: 4,
         },
-    ).replace(/^css/m, "injectGlobal"),
+    ).replace(/\/\* (injectGlobal|styled) \*\/ css`/g, "$1`"),
 );
