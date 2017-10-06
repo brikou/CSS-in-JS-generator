@@ -131,7 +131,8 @@ select.form-control:not([size]):not([multiple]) {
 }
 `;
 
-    const cssForEmotion = `import { css, injectGlobal, styled } from "emotion";
+    const cssForEmotion = `import { css, injectGlobal } from "emotion";
+import { styled } from "react-emotion";
 
 injectGlobal\`*, *::before, *::after {
     box-sizing: inherit;

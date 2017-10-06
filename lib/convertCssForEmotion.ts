@@ -50,14 +50,17 @@ export function convertCssForEmotion(css: string): string {
     let cssForEmotion = `import { ${[
         [...sortedKnownScopes].some((scope) => scope[0] === ".") ? "css" : "",
         sortedKnownScopes.has("root") ? "injectGlobal" : "",
-        [...sortedKnownScopes].some(
-            (scope) => scope !== "root" && scope[0] !== ".",
-        )
-            ? "styled"
-            : "",
     ]
         .filter(String)
         .join(", ")} } from "emotion";\n`;
+
+    if (
+        [...sortedKnownScopes].some(
+            (scope) => scope !== "root" && scope[0] !== ".",
+        )
+    ) {
+        cssForEmotion += 'import { styled } from "react-emotion";\n';
+    }
 
     sortedKnownScopes.forEach((scope) => {
         cssForEmotion += "\n";
