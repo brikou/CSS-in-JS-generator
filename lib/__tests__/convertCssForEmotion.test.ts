@@ -162,40 +162,15 @@ injectGlobal\`*, *::before, *::after {
 
 \`;
 
-export const badge = css\`@media print {
-    & {
-        border: 1px solid #000;
-    }
-
-
-}
-
-
-    display: inline-block;
-    padding: 0.25em 0.4em;
-    font-size: 75%;
+export const close = css\`
+    float: right;
+    font-size: 1.5rem;
     font-weight: bold;
     line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
 
-
-&:empty {
-    display: none;
-}
-
-\`;
-
-export const formControl = css\`select&:not([size]):not([multiple]) {
-    height: calc(2.25rem + 2px);
-}
-
-&::placeholder {
-    color: #868e96;
-    opacity: 1;
-}
 
 \`;
 
@@ -231,6 +206,32 @@ export const alertPrimary = css\`
 
 \`;
 
+export const badge = css\`@media print {
+    & {
+        border: 1px solid #000;
+    }
+
+
+}
+
+
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+
+
+&:empty {
+    display: none;
+}
+
+\`;
+
 export const badgeDanger = css\`
     color: #fff;
     background-color: #dc3545;
@@ -256,18 +257,6 @@ export const blockquoteFooter = css\`
 
 \`;
 
-export const close = css\`
-    float: right;
-    font-size: 1.5rem;
-    font-weight: bold;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    opacity: .5;
-
-
-\`;
-
 export const display1 = css\`
     font-size: 6rem;
     font-weight: 300;
@@ -281,6 +270,17 @@ export const display2 = css\`
     font-weight: 300;
     line-height: 1.1;
 
+
+\`;
+
+export const formControl = css\`select&:not([size]):not([multiple]) {
+    height: calc(2.25rem + 2px);
+}
+
+&::placeholder {
+    color: #868e96;
+    opacity: 1;
+}
 
 \`;
 `;
