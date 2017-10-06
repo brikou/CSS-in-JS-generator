@@ -13,11 +13,9 @@ npm install css-in-js-generator
 Here is a demo to convert [Bootstrap](http://getbootstrap.com/) to CSS-in-JS usable by [emotion](https://emotion.sh/).
 
 ```sh
-mkdir bootstrap
-
 curl https://unpkg.com/bootstrap@4.0.0-beta/dist/css/bootstrap.css | \
-    node ./node_modules/css-in-js-generator/index.js | \
-    tar -xz --directory=bootstrap
+    node ./node_modules/css-in-js-generator/index.js > \
+    bootstrap.js
 ```
 
 ## Demo

@@ -1,79 +1,72 @@
-import * as path from "path";
-
 import { convertScopedCssForEmotion } from "./convertScopedCssForEmotion";
 import { convertScopeToModuleName } from "./convertScopeToModuleName";
 import { getCssIndexedByScope } from "./getCssIndexedByScope";
 import { getRequiredScopes } from "./getRequiredScopes";
-import { getScopePath } from "./getScopePath";
-import { getScopeRelativePath } from "./getScopeRelativePath";
 
-export function convertCssForEmotion(css: string): Map<string, string> {
-    const cssForEmotion = new Map();
-    const scopesByDirname: Map<string, Set<string>> = new Map();
+export function convertCssForEmotion(css: string): string {
+    let cssForEmotion = "";
 
     const cssIndexedByScope = getCssIndexedByScope(css);
 
+    if (cssIndexedByScope.has("root")) {
+        if (cssIndexedByScope.size > 1) {
+            cssForEmotion += 'import { css, injectGlobal } from "emotion";\n';
+        } else {
+            cssForEmotion += 'import { injectGlobal } from "emotion";\n';
+        }
+    } else if (cssIndexedByScope.size > 0) {
+        cssForEmotion += 'import { css } from "emotion";\n';
+    }
+
     const knownScopes = new Set([...cssIndexedByScope.keys()]);
 
-    cssIndexedByScope.forEach((currentCss, currentScope) => {
-        let source = "";
-        if (currentScope === "root") {
-            source += 'import { injectGlobal } from "emotion";\n';
-        } else {
-            source += 'import { css } from "emotion";\n';
-        }
-        source += "\n";
+    const collator = new Intl.Collator(undefined, {
+        numeric: true,
+        sensitivity: "base",
+    });
 
-        const requiredScopes = getRequiredScopes(
-            currentCss,
-            currentScope,
-            knownScopes,
-        );
+    const sortedKnownScopes = [...knownScopes]
+        .sort((scopeA, scopeB) => {
+            if (scopeA === "root") {
+                return -1;
+            }
 
-        source += [...requiredScopes]
-            .sort()
-            .map((requiredScope) => {
-                const mName = convertScopeToModuleName(requiredScope);
-                const mFilename = getScopeRelativePath(
-                    currentScope,
-                    requiredScope,
-                    knownScopes,
-                );
+            return collator.compare(scopeA, scopeB);
+        })
+        .reduce((previousSortedKnownScopes: Set<string>, knownScope) => {
+            getRequiredScopes(
+                cssIndexedByScope.get(knownScope) as string,
+                knownScope,
+                knownScopes,
+            ).forEach((requiredScope) => {
+                if (previousSortedKnownScopes.has(requiredScope) === false) {
+                    previousSortedKnownScopes.add(requiredScope);
+                }
+            });
 
-                return `import { ${mName} } from "./${mFilename}";`
-                    .replace("./../", "../")
-                    .replace('.js"', '"');
-            })
-            .join("\n");
-        source += "\n\n";
+            if (previousSortedKnownScopes.has(knownScope) === false) {
+                previousSortedKnownScopes.add(knownScope);
+            }
+
+            return previousSortedKnownScopes;
+        }, new Set());
+
+    sortedKnownScopes.forEach((scope) => {
+        cssForEmotion += "\n";
 
         const convertedScopedCssForEmotion = convertScopedCssForEmotion(
-            currentCss,
-            currentScope,
+            cssIndexedByScope.get(scope) as string,
+            scope,
             knownScopes,
         );
 
-        if (currentScope === "root") {
-            source += `export default () => css\`${convertedScopedCssForEmotion}\`;\n`;
+        if (scope === "root") {
+            cssForEmotion += `injectGlobal\`${convertedScopedCssForEmotion}\`;\n`;
         } else {
-            source += `export const ${convertScopeToModuleName(
-                currentScope,
+            cssForEmotion += `export const ${convertScopeToModuleName(
+                scope,
             )} = css\`${convertedScopedCssForEmotion}\`;\n`;
         }
-
-        if (currentScope === "root") {
-            source = source.replace(/ css\`/m, " injectGlobal`");
-        }
-
-        const scopePath = getScopePath(currentScope, knownScopes);
-
-        const dirname = path.dirname(scopePath);
-        if (scopesByDirname.has(dirname) === false) {
-            scopesByDirname.set(dirname, new Set());
-        }
-        scopesByDirname.get(dirname)!.add(currentScope);
-
-        cssForEmotion.set(scopePath, source);
     });
 
     return cssForEmotion;

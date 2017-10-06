@@ -17,7 +17,7 @@ test("getRequiredScopes", () => {
         }
     `;
     const scope = ".alert-primary";
-    const scopes = new Set([
+    const knownScopes = new Set([
         "root",
         ".alert-link",
         ".alert-primary",
@@ -25,5 +25,5 @@ test("getRequiredScopes", () => {
     ]);
     const requiredScopes = new Set([".alert-link"]);
 
-    expect(getRequiredScopes(css, scope, scopes)).toEqual(requiredScopes);
+    expect(getRequiredScopes(css, scope, knownScopes)).toEqual(requiredScopes);
 });

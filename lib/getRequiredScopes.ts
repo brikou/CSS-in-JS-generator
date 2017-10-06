@@ -6,7 +6,7 @@ import { getSelectorScope } from "./getSelectorScope";
 export function getRequiredScopes(
     css: string,
     scope: string,
-    scopes: Set<string>,
+    knownScopes: Set<string>,
 ): Set<string> {
     const requiredScopes = new Set();
 
@@ -19,7 +19,7 @@ export function getRequiredScopes(
                     return;
                 }
 
-                if (scopes.has(selectorScope)) {
+                if (knownScopes.has(selectorScope)) {
                     requiredScopes.add(selectorScope);
                 }
             });
