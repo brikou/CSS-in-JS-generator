@@ -29,7 +29,7 @@
         "camelcase": "4.1.0",
         "postcss": "6.0.13",
         "postcss-selector-parser": "3.0.0-rc.0",
-        "prettier": "1.7.4"
+        "prettier": "1.13.6"
     },
     "devDependencies": {
         "@types/archiver": "2.0.0",
@@ -39,6 +39,7 @@
         "@types/prettier": "1.13.1",
         "jest": "23.2.0",
         "lodash.shuffle": "4.2.0",
+        "nodemon": "1.17.5",
         "tslint": "5.10.0",
         "typescript": "2.9.2"
     }
