@@ -1,6 +1,4 @@
 {
     "files.exclude": { "**/*.js": { "when": "$(basename).ts" } },
-    "prettier.tabWidth": 4,
-    "prettier.trailingComma": "all",
     "tslint.autoFixOnSave": true
 }

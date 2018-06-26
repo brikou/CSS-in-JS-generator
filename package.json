@@ -4,7 +4,7 @@
     "description": "A tool to generate trendy CSS-in-JS files from regular CSS.",
     "main": "index.js",
     "scripts": {
-        "prepublish": "npm run-script test && tsc --pretty",
+        "prepublish": "npm run-script test && tsc",
         "test": "jest"
     },
     "repository": {
@@ -33,13 +33,13 @@
     },
     "devDependencies": {
         "@types/archiver": "2.0.0",
-        "@types/jest": "21.1.2",
+        "@types/jest": "23.1.2",
         "@types/lodash": "4.14.77",
         "@types/node": "8.0.32",
-        "@types/prettier": "1.7.0",
-        "jest": "21.2.1",
+        "@types/prettier": "1.13.1",
+        "jest": "23.2.0",
         "lodash.shuffle": "4.2.0",
-        "tslint": "5.7.0",
-        "typescript": "2.5.3"
+        "tslint": "5.10.0",
+        "typescript": "2.9.2"
     }
 }
