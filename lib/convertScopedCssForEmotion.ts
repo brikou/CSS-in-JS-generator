@@ -1,5 +1,6 @@
-import * as postcss from "postcss";
-import * as Stringifier from "postcss/lib/stringifier";
+import {parse} from "postcss";
+import {stringify} from "postcss";
+import type {AnyNode} from "postcss";
 
 import { convertSelectorForEmotion } from "./convertSelectorForEmotion";
 import { escapeScopedCss } from "./escapeScopedCss";
@@ -13,7 +14,7 @@ export function convertScopedCssForEmotion(
 
     function builder(
         output: string,
-        node?: postcss.Node,
+        node?: AnyNode,
         flag?: "start" | "end",
     ) {
         if (
@@ -50,9 +51,7 @@ export function convertScopedCssForEmotion(
         scopedCssForEmotion += output;
     }
 
-    (new Stringifier(builder) as postcss.Stringifier).stringify(
-        postcss.parse(scopedCss),
-    );
+    stringify(parse(scopedCss), builder)
 
     return escapeScopedCss(scopedCssForEmotion);
 }

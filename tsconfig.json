@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
+        "esModuleInterop": true,
         "module": "commonjs",
         "noUnusedLocals": true,
         "strict": true,
-        "target": "es2015"
+        "target": "es2015",
+        "noEmit": true,
     }
 }

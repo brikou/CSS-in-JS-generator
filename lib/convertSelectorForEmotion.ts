@@ -1,5 +1,4 @@
-import * as parseSelector from "postcss-selector-parser";
-
+import parseSelector from "postcss-selector-parser";
 import { convertScopeToModuleName } from "./convertScopeToModuleName";
 
 export function convertSelectorForEmotion(

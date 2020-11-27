@@ -1,14 +1,13 @@
-import * as postcss from "postcss";
-
+import type {AnyNode} from "postcss";
 import { getSelectorScope } from "./getSelectorScope";
 
-export function getNodeScopes(node: postcss.Node): Set<string> {
+export function getNodeScopes(node: AnyNode): Set<string> {
     const nodeScopes = new Set();
 
     if (
         node.type === "rule" &&
-        (node.parent.type !== "atrule" ||
-            /keyframes/.test(node.parent.name) === false)
+        (node.parent && (node.parent.type !== "atrule" ||
+            /keyframes/.test(node.parent.name) === false))
     ) {
         (node.selectors || []).forEach((selector) => {
             nodeScopes.add(getSelectorScope(selector));
