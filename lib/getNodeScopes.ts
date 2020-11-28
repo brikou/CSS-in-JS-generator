@@ -3,7 +3,7 @@ import * as postcss from "postcss";
 import { getSelectorScope } from "./getSelectorScope";
 
 export function getNodeScopes(node: postcss.Node): Set<string> {
-    const nodeScopes = new Set();
+    const nodeScopes: Set<string> = new Set();
 
     if (
         node.type === "rule" &&

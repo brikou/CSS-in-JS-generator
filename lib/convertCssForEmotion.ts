@@ -33,7 +33,7 @@ export function convertCssForEmotion(css: string): string {
 
             return collator.compare(scopeA, scopeB);
         })
-        .reduce((previousSortedKnownScopes: Set<string>, knownScope) => {
+        .reduce((previousSortedKnownScopes: Set<string>, knownScope: string) => {
             getRequiredScopes(
                 cssIndexedByScope.get(knownScope) as string,
                 knownScope,

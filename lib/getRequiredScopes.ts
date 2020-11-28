@@ -8,7 +8,7 @@ export function getRequiredScopes(
     scope: string,
     knownScopes: Set<string>,
 ): Set<string> {
-    const requiredScopes = new Set();
+    const requiredScopes: Set<string> = new Set();
 
     const root = postcss.parse(css);
     root.walkRules((rule) => {
