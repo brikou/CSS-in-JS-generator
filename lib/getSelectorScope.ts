@@ -1,4 +1,4 @@
-import * as parseSelector from "postcss-selector-parser";
+import parseSelector from "postcss-selector-parser";
 
 export function getSelectorScope(selector: string): string {
     let selectorScope = "root";
