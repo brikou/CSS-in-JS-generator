@@ -115,53 +115,6 @@ select.form-control:not([size]):not([multiple]) {
 
     const cssForEmotion = `import { css, injectGlobal } from "emotion";
 
-injectGlobal\`*, *::before, *::after {
-    box-sizing: inherit;
-}
-
-
-
-@-ms-viewport {
-    width: device-width;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\`;
-
 export const close = css\`
     float: right;
     font-size: 1.5rem;
@@ -281,6 +234,53 @@ export const formControl = css\`select&:not([size]):not([multiple]) {
     color: #868e96;
     opacity: 1;
 }
+
+\`;
+
+injectGlobal\`*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+
+
+@-ms-viewport {
+    width: device-width;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \`;
 `;
