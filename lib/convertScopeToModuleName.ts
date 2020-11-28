@@ -1,4 +1,4 @@
-import * as camelCase from "camelcase";
+import camelCase from "camelcase";
 
 export function convertScopeToModuleName(scope: string) {
     return camelCase(scope)
