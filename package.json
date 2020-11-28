@@ -29,7 +29,7 @@
         "camelcase": "^6.2.0",
         "postcss": "6.0.13",
         "postcss-selector-parser": "3.0.0-rc.0",
-        "prettier": "1.7.4"
+        "prettier": "^2.2.1"
     },
     "devDependencies": {
         "@types/jest": "^26.0.15",
