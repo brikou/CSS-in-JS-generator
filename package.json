@@ -4,7 +4,7 @@
     "description": "A tool to generate trendy CSS-in-JS files from regular CSS.",
     "main": "index.js",
     "scripts": {
-        "prepublish": "npm run-script test && tsc --pretty",
+        "prepare": "npm run test",
         "test": "jest"
     },
     "repository": {
