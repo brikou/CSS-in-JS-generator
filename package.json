@@ -26,7 +26,7 @@
     },
     "homepage": "https://github.com/brikou/CSS-in-JS-generator#readme",
     "dependencies": {
-        "camelcase": "4.1.0",
+        "camelcase": "^6.2.0",
         "postcss": "6.0.13",
         "postcss-selector-parser": "3.0.0-rc.0",
         "prettier": "1.7.4"
