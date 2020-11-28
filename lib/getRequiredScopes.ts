@@ -1,5 +1,5 @@
 import * as postcss from "postcss";
-import * as parseSelector from "postcss-selector-parser";
+import parseSelector from "postcss-selector-parser";
 
 import { getSelectorScope } from "./getSelectorScope";
 

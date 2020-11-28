@@ -1,5 +1,5 @@
 import * as postcss from "postcss";
-import * as Stringifier from "postcss/lib/stringifier";
+import Stringifier from "postcss/lib/stringifier";
 
 import { convertSelectorForEmotion } from "./convertSelectorForEmotion";
 import { escapeScopedCss } from "./escapeScopedCss";

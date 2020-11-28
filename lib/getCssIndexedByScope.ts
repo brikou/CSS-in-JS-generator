@@ -1,5 +1,5 @@
 import * as postcss from "postcss";
-import * as Stringifier from "postcss/lib/stringifier";
+import Stringifier from "postcss/lib/stringifier";
 
 import { getNodeScopes } from "./getNodeScopes";
 import { getSelectorScope } from "./getSelectorScope";
