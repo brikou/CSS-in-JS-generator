@@ -1,4 +1,5 @@
-import * as postcss from "postcss";
+import {parse} from "postcss";
+import type {Node} from "postcss";
 import Stringifier from "postcss/lib/stringifier";
 
 import { getNodeScopes } from "./getNodeScopes";
@@ -11,7 +12,7 @@ export function getCssIndexedByScope(css: string): Map<string, string> {
 
     function builder(
         output: string,
-        node?: postcss.Node,
+        node?: Node,
         flag?: "start" | "end",
     ) {
         if (flag === "start" && node) {
@@ -48,8 +49,8 @@ export function getCssIndexedByScope(css: string): Map<string, string> {
         }
     }
 
-    (new Stringifier(builder) as postcss.Stringifier).stringify(
-        postcss.parse(css),
+    (new Stringifier(builder)).stringify(
+        parse(css),
     );
 
     return cssIndexedByScope;

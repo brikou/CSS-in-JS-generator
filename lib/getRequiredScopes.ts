@@ -1,4 +1,4 @@
-import * as postcss from "postcss";
+import {parse} from "postcss";
 import parseSelector from "postcss-selector-parser";
 
 import { getSelectorScope } from "./getSelectorScope";
@@ -10,7 +10,7 @@ export function getRequiredScopes(
 ): Set<string> {
     const requiredScopes: Set<string> = new Set();
 
-    const root = postcss.parse(css);
+    const root = parse(css);
     root.walkRules((rule) => {
         parseSelector((nodes: any) => {
             nodes.walkClasses((node: any) => {
